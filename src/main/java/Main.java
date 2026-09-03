@@ -13,30 +13,16 @@ public class Main {
         System.out.print("enter username: ");
         String username = sc.nextLine();
 
-        String url = "https://api.github.com/users/" + username;
+        GithubClient client = new GithubClient();
+        User user = client.getUser(username);
 
-        try (HttpClient client = HttpClient.newHttpClient()) {
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(url))
-                    .GET()
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            ObjectMapper mapper = new ObjectMapper();
-
-            User user = mapper.readValue(response.body(), User.class);
-
+        if (user != null) {
             System.out.println("username: " + user.login);
             System.out.println("bio: " + user.bio);
             System.out.println("Followers: " + user.followers);
             System.out.println("Following: " + user.following);
             System.out.println("Public repos: " + user.public_repos);
-
-
-        } catch (Exception e) {
-            // ignore
         }
     }
 }
