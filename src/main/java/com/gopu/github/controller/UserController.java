@@ -17,12 +17,10 @@ public class UserController {
 
     public void run() {
 
-//        Scanner sc = new Scanner(System.in);
-//
-//        System.out.print("enter username: ");
-//        String username = sc.nextLine();
+        Scanner sc = new Scanner(System.in);
 
-        String username = "NAPO-cyber";
+        System.out.print("enter username: ");
+        String username = sc.nextLine();
 
         User user = service.getUser(username);
 
