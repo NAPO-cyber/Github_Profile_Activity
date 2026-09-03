@@ -12,11 +12,18 @@ import java.net.http.HttpResponse;
 @Component
 public class GithubClient {
 
+    private HttpClient client;
+
+    public GithubClient(HttpClient client) {
+        this.client = client;
+    }
+
     public User getUser(String username) {
 
         String url = "https://api.github.com/users/" + username;
 
-        try (HttpClient client = HttpClient.newHttpClient()) {
+
+        try {
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(url))
