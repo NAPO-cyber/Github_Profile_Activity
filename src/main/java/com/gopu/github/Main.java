@@ -9,10 +9,10 @@ import java.util.Scanner;
 @Component
 public class Main {
 
-    private final GithubClient client;
+    private final UserService service;
 
-    public Main(GithubClient client) {
-        this.client = client;
+    public Main(UserService service) {
+        this.service = service;
     }
 
     public void run() {
@@ -22,7 +22,7 @@ public class Main {
             System.out.print("enter username: ");
             String username = sc.nextLine();
 
-            User user = client.getUser(username);
+            User user = service.getUser(username);
 
             if (user != null) {
                 System.out.println("username: " + user.login);
@@ -36,9 +36,6 @@ public class Main {
     public static void main (String[]args){
 
         ApplicationContext context = new AnnotationConfigApplicationContext("com.gopu.github");
-
-        GithubClient client = context.getBean(GithubClient.class);
-        System.out.println(client);
 
         Main app = context.getBean(Main.class);
         app.run();
