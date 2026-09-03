@@ -1,3 +1,5 @@
+import org.springframework.context.ApplicationContext;
+
 import java.util.Scanner;
 
 public class Main {
@@ -27,6 +29,8 @@ public class Main {
         }
 
     public static void main (String[]args){
+
+        ApplicationContext context = new ApplicationContext("java");
 
         GithubClient client = new GithubClient();
 
