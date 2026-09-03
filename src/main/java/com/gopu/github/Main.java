@@ -1,7 +1,12 @@
+package com.gopu.github;
+
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class Main {
 
     private final GithubClient client;
@@ -30,11 +35,12 @@ public class Main {
 
     public static void main (String[]args){
 
-        ApplicationContext context = new ApplicationContext("java");
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.gopu.github");
 
-        GithubClient client = new GithubClient();
+        GithubClient client = context.getBean(GithubClient.class);
+        System.out.println(client);
 
-        Main app = new Main(client);
+        Main app = context.getBean(Main.class);
         app.run();
     }
 }
