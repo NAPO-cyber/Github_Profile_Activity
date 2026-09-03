@@ -1,6 +1,6 @@
-import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -15,9 +15,6 @@ public class Main {
 
         String url = "https://api.github.com/users/" + username;
 
-        System.out.println("username: " + username);
-        System.out.println("url: " + url);
-
         try (HttpClient client = HttpClient.newHttpClient()) {
 
             HttpRequest request = HttpRequest.newBuilder()
@@ -27,9 +24,18 @@ public class Main {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            System.out.println(response.body());
+            ObjectMapper mapper = new ObjectMapper();
 
-        } catch (IOException | InterruptedException | URISyntaxException e) {
+            User user = mapper.readValue(response.body(), User.class);
+
+            System.out.println("username: " + user.login);
+            System.out.println("bio: " + user.bio);
+            System.out.println("Followers: " + user.followers);
+            System.out.println("Following: " + user.following);
+            System.out.println("Public repos: " + user.public_repos);
+
+
+        } catch (Exception e) {
             // ignore
         }
     }
