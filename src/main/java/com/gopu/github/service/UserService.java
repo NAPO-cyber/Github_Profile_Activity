@@ -1,6 +1,7 @@
-package com.gopu.github;
+package com.gopu.github.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gopu.github.client.GithubClient;
+import com.gopu.github.model.User;
 import org.springframework.stereotype.Service;
 
 @Service

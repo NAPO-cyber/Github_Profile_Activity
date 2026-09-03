@@ -1,6 +1,7 @@
-package com.gopu.github;
+package com.gopu.github.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gopu.github.model.User;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;

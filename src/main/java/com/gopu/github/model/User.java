@@ -1,4 +1,4 @@
-package com.gopu.github;
+package com.gopu.github.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
