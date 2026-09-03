@@ -2,17 +2,24 @@ package com.gopu.github.controller;
 
 import com.gopu.github.model.User;
 import com.gopu.github.service.UserService;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Scanner;
 
-@Controller
+@RestController
 public class UserController {
 
-    private UserService service;
+    private final UserService service;
 
     public UserController(UserService service) {
         this.service = service;
+    }
+
+    @GetMapping("/api/users/{username}")
+    public User getUser(@PathVariable String username) {
+        return service.getUser(username);
     }
 
     public void run() {
