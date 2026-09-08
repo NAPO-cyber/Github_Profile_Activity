@@ -1,5 +1,6 @@
 package com.gopu.github.controller;
 
+import com.gopu.github.model.Event;
 import com.gopu.github.model.User;
 import com.gopu.github.service.UserService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,6 +23,11 @@ public class UserController {
     @GetMapping("/api/users/{username}")
     public User getUser(@PathVariable String username) {
         return service.getUser(username);
+    }
+
+    @GetMapping("/api/users/{username}/activity")
+    public Event[] getActivity(@PathVariable String username) {
+        return service.getActivity(username);
     }
 
     public void run() {
