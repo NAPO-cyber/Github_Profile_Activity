@@ -14,10 +14,13 @@ import java.net.http.HttpResponse;
 @Component
 public class GithubClient {
 
-    private HttpClient client;
+    private final ObjectMapper mapper;
 
-    public GithubClient(HttpClient client) {
+    private final HttpClient client;
+
+    public GithubClient(HttpClient client, ObjectMapper mapper) {
         this.client = client;
+        this.mapper = mapper;
     }
 
     public User getUser(String username) {
@@ -33,8 +36,6 @@ public class GithubClient {
                     .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            ObjectMapper mapper = new ObjectMapper();
 
             return mapper.readValue(response.body(), User.class);
 
@@ -56,7 +57,6 @@ public class GithubClient {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(response.body(), Event[].class);
 
         } catch (Exception e) {
@@ -78,8 +78,6 @@ public class GithubClient {
 
             HttpResponse<String> response =
                     client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            ObjectMapper mapper = new ObjectMapper();
 
             return mapper.readValue(response.body(), Repo[].class);
 
