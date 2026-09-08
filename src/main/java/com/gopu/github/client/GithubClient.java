@@ -2,6 +2,7 @@ package com.gopu.github.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gopu.github.model.Event;
+import com.gopu.github.model.Repo;
 import com.gopu.github.model.User;
 import org.springframework.stereotype.Component;
 
@@ -61,6 +62,29 @@ public class GithubClient {
         } catch (Exception e) {
             System.out.println("error: " + e.getMessage());
             return new Event[0];
+        }
+    }
+
+    public Repo[] getRepos(String username) {
+
+        String url = "https://api.github.com/users/" + username + "/repos";
+
+        try {
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response =
+                    client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            return mapper.readValue(response.body(), Repo[].class);
+
+        } catch (Exception e) {
+            return new Repo[0];
         }
     }
 
