@@ -23,6 +23,7 @@ public class GithubClient {
 
         String url = "https://api.github.com/users/" + username;
 
+
         try {
 
             HttpRequest request = HttpRequest.newBuilder()
