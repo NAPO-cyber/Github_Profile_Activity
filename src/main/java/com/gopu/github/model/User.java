@@ -10,5 +10,6 @@ public class User {
     public int followers;
     public int following;
     public int public_repos;
+    public String avatar_url;
 
 }
