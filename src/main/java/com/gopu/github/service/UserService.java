@@ -2,13 +2,14 @@ package com.gopu.github.service;
 
 import com.gopu.github.client.GithubClient;
 import com.gopu.github.model.Event;
+import com.gopu.github.model.Repo;
 import com.gopu.github.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    private GithubClient client;
+    private final GithubClient client;
 
 
     public UserService(GithubClient client) {
@@ -22,4 +23,9 @@ public class UserService {
     public Event[] getActivity(String username) {
         return client.getActivity(username);
     }
+
+    public Repo[] getRepos(String username) {
+        return client.getRepos(username);
+    }
+
 }
